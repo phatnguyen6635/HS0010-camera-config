@@ -8,7 +8,6 @@
 - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Usage](#usage)
-    - [`main.py`](#mainpy)
 - [Notes](#notes)
 
 ---
@@ -104,17 +103,6 @@ Each camera vendor is isolated in its own directory with dedicated examples and 
   - Common Vision Blox (CVB) examples.
   - Used as a cross-vendor reference library for camera handling.
 
-### Common Files
-
-- **`main.py`**
-  - Central entry point for testing camera connectivity and configuration.
-- **`settings/`**
-  - Vendor-specific camera configuration files.
-- **`requirements.txt`**
-  - Python dependencies required to run the project.
-- **`pyproject.toml`**
-  - Project metadata and build configuration.
-
 ---
 
 ## Getting Started
@@ -128,56 +116,51 @@ git clone git@github.com:<your-username>/HS0010-camera-config.git
 cd HS0010-camera-config
 ```
 
-2. Create and activate a virtual environment (recommended)
+2. Create and activate a virtual environment using UV (recommmended)
 
 Using **conda**:
 
 ```bash
-conda create -n camera-config python=3.9
-conda activate camera-config
-```
-
-Or using **venv**:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
+uv  init --python 3.10
+uv venv .venv
+source .venv/bin/activate
 ```
 
 3. Install Python dependencies
 
 ```bash
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
-
-> **Note:**  
-> Vendor SDKs such as **Basler Pylon**, **Hikrobot MVS**, **Allied Vision Vimba**, and **CVB** must be installed separately according to each manufacturer’s official documentation.
-
----
 
 ## Usage
 
-### `main.py`
+This repository **does not use a single unified entry script**.  
+The workflow is **vendor-based**.
 
-The `main.py` script acts as a **central entry point** where you can:
+**Select the camera brand you are using**, navigate to the corresponding folder, and run the provided scripts to test camera connection and configuration.
 
-- Select the camera vendor
-- Test camera detection and connection
-- Load and apply camera parameters
-- Validate SDK installation
+### General Workflow
 
-Run:
+1. Identify your camera vendor (Basler, Hikrobot, Mako, or CVB)
+2. Navigate to the vendor-specific directory
+3. Run the example scripts to:
+   - List connected cameras
+   - Open and stream from the camera
+   - Load or save camera parameters (if supported)
+
+Each script is standalone and focuses on a specific task.
+
+---
+
+### Examples
+
+#### Basler Camera
 
 ```bash
-python main.py
-```
-
-Vendor-specific scripts can also be executed directly, for example:
-
-```bash
-python basler/list_cameras.py
-python hik/open_camera.py
-python mako/asynchronous_grab_opencv.py
+cd basler
+python list_cameras.py        # List all connected Basler cameras
+python open_camera.py         # Open camera and start grabbing
+python load_save_settings.py  # Load or save camera parameters
 ```
 
 ---
