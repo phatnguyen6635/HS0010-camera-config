@@ -149,9 +149,6 @@ The workflow is **vendor-based**.
    - Load or save camera parameters (if supported)
 
 Each script is standalone and focuses on a specific task.
-
----
-
 ### Examples
 
 #### Basler Camera
