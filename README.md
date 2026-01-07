@@ -132,6 +132,8 @@ source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
 
+---
+
 ## Usage
 
 This repository **does not use a single unified entry script**.  
